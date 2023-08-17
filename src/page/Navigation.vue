@@ -3,7 +3,7 @@
         <ul>
             <li @click="navToHome">首頁</li>
             <li @click="navToAbout">關於</li>
-            <li @click="checkLogin">個人</li>
+            <li @click="navToPersonal">個人</li>
             <li @click="navToLogin">{{ switchCaption }}</li>
         </ul>
     </header>
@@ -26,16 +26,14 @@ export default {
             this.$router.push({ name: 'about' })
         },
         navToLogin() {
-            this.$store.commit('switchButton')
-        },
-        checkLogin() {
             if (this.$store.state.formIsValid === false) {
-                window.alert('請先登入')
-                this.$router.push({ name: 'login' })
+                this.$router.push({ name: 'login' });
             } else {
-                this.$router.push({ name: 'personal' })
-
+                this.$store.commit('isLogout')
             }
+        },
+        navToPersonal() {
+            this.$router.push({ name: 'personal' })
         }
 
     },

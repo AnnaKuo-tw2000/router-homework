@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Navigation from './page/Navigation.vue';
+import store from './store/index';
+
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -27,6 +29,14 @@ const router = createRouter({
           name: 'personal',
           path: '/personal',
           component: () => import('./page/PersonalData.vue'),
+          beforeEnter(to, from, next) {
+            if (store.state.formIsValid) {
+              next();
+            } else {
+              window.alert('請先登錄');
+              next({ name: 'login' });
+            }
+          },
         },
       ],
     },

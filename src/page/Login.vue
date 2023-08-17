@@ -1,15 +1,15 @@
 <template>
     <form @submit.prevent="submitForm">
         <div class="username">
-            用戶名：<input type="text" v-model="$store.state.userName">
+            用戶名：<input type="text" v-model="userName">
         </div>
         <div class="password">
-            密碼：<input type="password" v-model="$store.state.passWord">
+            密碼：<input type="password" v-model="passWord">
         </div>
         <div class="button">
             <button :disabled="btnDisable">登入</button>
         </div>
-        <p v-if="$store.state.correct">用戶名或密碼錯誤</p>
+        <p v-if="correct">用戶名或密碼錯誤</p>
     </form>
 </template>
 <script>
@@ -17,20 +17,17 @@ export default {
     emits: ['submitForm'],
     data() {
         return {
-            isBtnDisable: true,
-            // userName: '',
-            // passWord: '',
-            // formIsValid: true,
-            // mode: '登入',
-
+            userName: '',
+            passWord: '',
+            correct: false,
         }
     },
     computed: {
         btnDisable() {
-            if (this.$store.state.userName && this.$store.state.passWord) {
-                return this.isBtnDisable === false
+            if (this.userName && this.passWord) {
+                return false
             } else {
-                return this.isBtnDisable === true
+                return true
             }
         },
 
@@ -38,10 +35,14 @@ export default {
     },
     methods: {
         submitForm() {
-            this.$store.commit('isLogin')
+            if (this.userName === 'anna' && this.passWord === 'anna001114') {
+                this.$store.commit('isLogin')
+                this.correct = false;
+                this.$router.push({ name: 'home' });
+            } else {
+                this.correct = true;
+            }
         },
-
-
     }
 }
 
