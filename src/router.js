@@ -18,22 +18,22 @@ const router = createRouter({
         {
           name: 'about',
           path: '/about',
-          redirect: '/introduction',
+          redirect: { name: 'introduction' },
           component: () => import('./page/AboutMore.vue'),
           children: [
             {
               name: 'introduction',
-              path: '/introduction',
+              path: 'introduction',
               component: () => import('./page/sideBar/Introduction.vue'),
             },
             {
               name: 'author',
-              path: '/author',
+              path: 'author',
               component: () => import('./page/sideBar/Author.vue'),
             },
             {
               name: 'background',
-              path: '/background',
+              path: 'background',
               component: () => import('./page/sideBar/BackGround.vue'),
             },
           ],

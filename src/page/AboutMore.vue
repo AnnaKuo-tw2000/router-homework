@@ -26,8 +26,6 @@ li {
     height: 57px;
 }
 
-
-
 a {
     color: #b8860b;
     text-decoration: none;
