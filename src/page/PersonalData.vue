@@ -6,7 +6,7 @@
     </div>
     <div class="filter" v-if="result.length > 1">
         <p>我的目的地：</p>
-        <select @change="getFlightMsg">
+        <select @change="getFlightMsg" ref="select">
             <option value="" disabled selected>請選擇</option>
             <option v-for="item in codeList" :key="item">
                 {{ item }}
@@ -29,14 +29,18 @@ export default {
 
         }
     },
+    watch: {
+        '$route.query.id'(newVal) {
+            this.$refs.select.value = newVal
+            this.resultMessage = this.findRecentFlight(this.resource, newVal);
+        }
+    },
     methods: {
         sendXhrRequest() {
             fetch('https://tdx.transportdata.tw/api/basic/v2/Air/FIDS/Airport/Departure', {
                 headers: {
                     'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(),
-
+                }
             }).then(response => {
                 if (response.ok) {
                     return response.json()
@@ -98,7 +102,8 @@ export default {
             }
         },
         getFlightMsg(e) {
-            this.resultMessage = this.findRecentFlight(this.resource, e.target.value);
+            this.$router.push({ name: 'personal', query: { id: e.target.value } })
+            // this.resultMessage = this.findRecentFlight(this.resource, e.target.value);
         }
 
     },
