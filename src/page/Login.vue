@@ -14,7 +14,7 @@
 </template>
 <script>
 export default {
-    emits: ['submitForm'],
+    // emits: ['submitForm'],
     data() {
         return {
             userName: '',

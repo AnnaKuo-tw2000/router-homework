@@ -16,6 +16,11 @@ const router = createRouter({
           component: () => import('./page/HomeView.vue'),
         },
         {
+          name: 'setting',
+          path: 'setting',
+          component: () => import('./page/SettingData.vue'),
+        },
+        {
           name: 'about',
           path: '/about',
           redirect: { name: 'introduction' },
@@ -40,12 +45,12 @@ const router = createRouter({
         },
         {
           name: 'login',
-          path: '/login',
+          path: 'login',
           component: () => import('./page/Login.vue'),
         },
         {
           name: 'personal',
-          path: '/personal',
+          path: 'personal',
           component: () => import('./page/PersonalData.vue'),
           beforeEnter(to, from, next) {
             if (store.state.formIsValid) {

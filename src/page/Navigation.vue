@@ -4,6 +4,7 @@
             <li @click="navToHome">首頁</li>
             <li @click="navToAbout">關於</li>
             <li @click="checkLogin">個人</li>
+            <li @click="navToSet">設定</li>
             <li @click="navToLogin">{{ switchCaption }}</li>
         </ul>
     </header>
@@ -26,7 +27,10 @@ export default {
             this.$router.push({ name: 'about' })
         },
         navToLogin() {
-            this.$store.commit('switchButton')
+            this.$router.push({ name: 'login' })
+        },
+        navToSet() {
+            this.$router.push({ name: 'setting' })
         },
         checkLogin() {
             if (this.$store.state.formIsValid === false) {
