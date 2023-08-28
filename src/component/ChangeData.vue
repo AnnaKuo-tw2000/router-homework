@@ -21,20 +21,18 @@
 </template>
 
 <script>
+import lodash from 'lodash';
 
 export default {
     props: ['settingData'],
+    beforeCreate() {
+        console.log(this.btnDisable)
+    },
     data() {
         return {
-            newData: {
-                address: this.settingData.address,
-                phone: this.settingData.phone,
-                email: this.settingData.email,
-                sex: this.settingData.sex,
-            },
+            newData: lodash.cloneDeep(this.settingData),
             // showData: false,
             btnDisable: true
-
         }
     },
     methods: {
@@ -50,6 +48,7 @@ export default {
     },
     computed: {
         btnProhibited() {
+            // 這三個值如果有空字串，那就回傳true
             const anyFieldEmpty =
                 !this.newData.address || !this.newData.phone || !this.newData.email;
 

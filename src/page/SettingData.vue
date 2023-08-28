@@ -10,13 +10,12 @@
             </div>
             <div><button @click="showDataChange = true">變更資料</button></div>
         </template>
-        <ChangeData v-else :settingData="settingData" @returnCurSet="returnCurSet" @submitData="submitData">
-        </ChangeData>
+        <ChangeData v-else :settingData="settingData" @returnCurSet="returnCurSet" @submitData="submitData" />
     </main>
 </template>
 
 <script>
-import ChangeData from './ChangeData.vue';
+import ChangeData from '../component/ChangeData.vue';
 export default {
     components: {
         ChangeData
