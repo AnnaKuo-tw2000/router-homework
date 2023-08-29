@@ -27,7 +27,12 @@ export default {
             this.$router.push({ name: 'about' })
         },
         navToLogin() {
-            this.$router.push({ name: 'login' })
+            if (this.$store.state.formIsValid) {
+                this.$store.commit('isLogout')
+                this.navToHome()
+            } else {
+                this.$router.push({ name: 'login' })
+            }
         },
         navToSet() {
             this.$router.push({ name: 'setting' })
