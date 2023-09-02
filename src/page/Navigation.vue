@@ -5,6 +5,7 @@
             <li @click="navToAbout">關於</li>
             <li @click="checkLogin">個人</li>
             <li @click="navToSet">設定</li>
+            <li @click="navToProduct">商品</li>
             <li @click="navToLogin">{{ switchCaption }}</li>
         </ul>
     </header>
@@ -36,6 +37,9 @@ export default {
         },
         navToSet() {
             this.$router.push({ name: 'setting' })
+        },
+        navToProduct() {
+            this.$router.push({ name: 'product' })
         },
         checkLogin() {
             if (this.$store.state.formIsValid === false) {

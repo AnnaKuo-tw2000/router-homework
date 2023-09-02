@@ -12,7 +12,7 @@ const router = createRouter({
       children: [
         {
           name: 'home',
-          path: '/home',
+          path: 'home',
           component: () => import('./page/HomeView.vue'),
         },
         {
@@ -21,8 +21,13 @@ const router = createRouter({
           component: () => import('./page/SettingData.vue'),
         },
         {
+          name: 'product',
+          path: 'product',
+          component: () => import('./page/ProductList.vue'),
+        },
+        {
           name: 'about',
-          path: '/about',
+          path: 'about',
           redirect: { name: 'introduction' },
           component: () => import('./page/AboutMore.vue'),
           children: [
