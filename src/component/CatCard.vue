@@ -1,7 +1,7 @@
 <template>
     <div class="cardBox">
         <span style="font-weight: bold;">{{ cats.name }}</span>
-        <input type="checkbox" @change="checkboxChanged" />
+        <input type="checkbox" ref="checkbox" @change="checkboxChanged" />
         <p>年齡：{{ computedAge }}</p>
         <p>描述：{{ cats.des }}</p>
         <p>住址：{{ cats.address }}</p>
@@ -10,7 +10,7 @@
 <script>
 import dayjs from 'dayjs'
 export default {
-    props: ['cats',],
+    props: ['cats'],
     data() {
         return {
 
@@ -21,8 +21,9 @@ export default {
             this.$emit('checkboxChanged', this.cats.id, e.target.checked)
 
         },
-
-
+        removeCheck() {
+            this.$refs.checkbox.checked = false
+        }
     },
     computed: {
         computedAge() {
