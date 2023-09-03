@@ -1,7 +1,8 @@
 <template>
     <main style="padding:30px;">
         <div style="display:flex;flex-wrap:wrap;gap:20px 20px;margin-bottom: 30px;" v-show="!showDataChange">
-            <CatCard v-for="cats in catList" :key="cats.id" :cats="cats" @checkboxChanged="updateSelectedCats" />
+            <CatCard ref="carCard" v-for="cats in catList" :key="cats.id" :cats="cats"
+                @checkboxChanged="updateSelectedCats" />
         </div>
         <button v-show="!showDataChange" @click="showDataChange = true">變更地址</button>
         <div v-show="showDataChange">
@@ -37,20 +38,18 @@ export default {
     },
     methods: {
         changeAddress() {
-            if (!this.catNewAddress) {
-                this.showDataChange = false
-            } else {
+            if (this.catNewAddress) {
                 this.catList.forEach(cur => {
                     if (this.selectedCatIds.includes(cur.id)) {
                         cur.address = this.catNewAddress;
                     }
                 })
             }
-
             this.selectedCatIds = [];
+            this.$refs.carCard.forEach((cur) => {
+                cur.removeCheck()
+            })
             this.showDataChange = false;
-
-            // console.log(this.selectedCatIds)
         },
         updateSelectedCats(catId, check) {
             if (check === true) {
